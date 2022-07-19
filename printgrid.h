@@ -1,2 +1,4 @@
 #include <stdio.h>
-void printGrid(int index);
+void printGrid(int grid_index);
+void update_array(int *array, int *array_index, int num);
+int check_array(int *array, int value);
