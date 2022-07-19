@@ -31,6 +31,9 @@ void update_array(int *array, int *array_index, int num)
     for(int i = 0; i < *array_index; i++){
         printf("%d ", array[i]);
     }
+    if(check_for_triplet(array)){
+        exit(0);
+    }
 }
 
 int check_array(int *array, int value)
@@ -45,3 +48,17 @@ int check_array(int *array, int value)
     return present;
 }
 
+int check_for_triplet(int *array)
+{
+    for(int i = 0; i < 3; i++){
+        for(int j = i+1; j < 4; j++){
+            for(int k = j+1; k < 5; k++){
+                if(array[i]+array[j]+array[k] == 15){
+                    printf("\r\n----you won----");
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
