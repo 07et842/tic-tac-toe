@@ -2,29 +2,9 @@
 
 int grid[9] = {6, 7, 2, 1, 5, 9, 8, 3, 4};
 
-void printGrid(int index){
+void printGrid(int *array, int grid_index){
     for(int i = 0; i < 9; i++){
-        if(index == grid[i]){
-            printf (" x ");
-        } else {
-            printf(" %d ", grid[i]);
-        }
-        if(i < 8){
-            if((i+1) % 3 == 0){
-                printf("\r\n---+---+---\r\n");
-            } else {
-                printf("|");
-            }
-        }
-    }
-}
-#include "printgrid.h"
-
-int grid[9] = {6, 7, 2, 1, 5, 9, 8, 3, 4};
-
-void printGrid(int grid_index){
-    for(int i = 0; i < 9; i++){
-        if(grid_index == grid[i]){
+        if((grid_index == grid[i]) || (check_array(array, grid[i]))){
             printf (" x ");
         } else {
             printf(" %d ", grid[i]);
@@ -64,3 +44,4 @@ int check_array(int *array, int value)
     }
     return present;
 }
+
