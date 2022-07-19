@@ -3,14 +3,15 @@
 #include "printgrid.h"
 int main()
 {
-    int input = 0;
+    int input = 0, array[9] = {0}, array_index = 0;
     printGrid(0);
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 9; i++){
         printf("\r\nenter value:");
         scanf("%d", &input);
         if(input){
             system("clear");
             printGrid(input);
+            update_array(array, &array_index, input);
         }
     }
 
