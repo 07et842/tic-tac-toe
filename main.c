@@ -11,7 +11,7 @@ int main()
     int user_input = 0, cpu_input = 0, x;
     
     printGrid();
-    printf("\r\nenter value:");
+    printf("\r\nyour turn:");
     scanf("%d", &user_input);
     if(user_input){
         update_array(user_array, &user_array_index, user_input);
@@ -24,7 +24,7 @@ int main()
     }
 
     for(int i = 0; i < 4; i++){
-        printf("\r\nenter value:");
+        printf("\r\nyour turn:");
         scanf("%d", &user_input);
         if(user_input){
             while(user_input != update_array(user_array, &user_array_index, user_input)){
@@ -32,6 +32,7 @@ int main()
             }
             printGrid();
             if(check_for_triplet(user_array)){
+                printf("\r\n----you won----");
                 exit(0);
             }
             cpu_input = check_for_possible_triplet(user_array);
@@ -41,8 +42,13 @@ int main()
                 printf("\r\ncpu3: %d\r\n", cpu_input);
             }
             update_array(cpu_array, &cpu_array_index, cpu_input);
-            printf("\r\ncpu's turn");scanf("%d", &x);
+            printf("\r\ncpu's turn:");
+            // scanf("%d", &x);
             printGrid();
+            if(check_for_triplet(cpu_array)){
+                printf("\r\n----cpu won----");
+                exit(0);
+            }
         } else {
             exit(0);
         }
