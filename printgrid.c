@@ -1,13 +1,19 @@
 #include "printgrid.h"
 
 int grid[9] = {6, 7, 2, 1, 5, 9, 8, 3, 4};
+int user_array[5] = {0}, cpu_array[4] = {0};
 
-void printGrid(int *array, int grid_index){
+void printGrid(){
+    system("clear");
+    printf("\r");
     for(int i = 0; i < 9; i++){
-        if((grid_index == grid[i]) || (check_array(array, grid[i]))){
+        //use "grid[i]"" instead of "i+1" to see actual matrix
+        if(check_value_in_array(user_array, i+1)){
             printf (" x ");
+        } else if(check_value_in_array(cpu_array, i+1)){
+            printf (" o ");
         } else {
-            printf(" %d ", grid[i]);
+            printf(" %d ", i+1);
         }
         if(i < 8){
             if((i+1) % 3 == 0){
@@ -19,27 +25,23 @@ void printGrid(int *array, int grid_index){
     }
 }
 
-void update_array(int *array, int *array_index, int num)
+int update_array(int *array, int *array_index, int num)
 {
-    if(check_array(array, num)){
+    int ret_val = num;
+    if(check_value_in_array(array, num)){
         printf("\r\nnumber exist\r\n");
+        return 0;
     } else {
         array[*array_index] = num;
         (*array_index)++;
     }
-    printf("\r\n");
-    for(int i = 0; i < *array_index; i++){
-        printf("%d ", array[i]);
-    }
-    if(check_for_triplet(array)){
-        exit(0);
-    }
+    return ret_val;
 }
 
-int check_array(int *array, int value)
+int check_value_in_array(int *array, int value)
 {
     int i = 0, present = 0;
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 5; i++){
         if(value == array[i]){
             present = 1;
             break;
@@ -56,6 +58,22 @@ int check_for_triplet(int *array)
                 if(array[i]+array[j]+array[k] == 15){
                     printf("\r\n----you won----");
                     return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+int check_for_possible_triplet(int *array)
+{
+    int possiblity = 0;
+    for(int i = 0; i < 3; i++){
+        for(int j = i+1; j < 4; j++){
+            possiblity = 15 - (array[i] + array[j]);
+            if(!check_value_in_array(array, possiblity)){
+                if(!check_value_in_array(cpu_array, possiblity)){
+                    // printf("\r\n -> %d", possiblity);
+                    return possiblity;
                 }
             }
         }
