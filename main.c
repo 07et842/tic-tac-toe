@@ -16,7 +16,11 @@ int main()
     if(user_input){
         update_array(user_array, &user_array_index, user_input);
         printGrid();
-        cpu_input = user_input + 1;
+        if(user_input == 5){
+            cpu_input = 2;
+        } else {
+            cpu_input = 5;
+        }
         update_array(cpu_array, &cpu_array_index, cpu_input);
         printGrid();
     } else {
@@ -35,14 +39,17 @@ int main()
                 printf("\r\n----you won----");
                 exit(0);
             }
-            cpu_input = check_for_possible_triplet(user_array);
-            printf("\r\nusr3: %d\r\n", cpu_input);
+            cpu_input = check_for_possible_triplet(cpu_array);
+            printf("\r\ncpu3: %d", cpu_input);
             if(!cpu_input){
-                cpu_input = check_for_possible_triplet(cpu_array);
-                printf("\r\ncpu3: %d\r\n", cpu_input);
+                cpu_input = check_for_possible_triplet(user_array);
+                printf("\r\nusr3: %d", cpu_input);
+            }
+            if(!cpu_input){
+                cpu_input = 4; // user must have entered center and corner opposite to cpu
             }
             update_array(cpu_array, &cpu_array_index, cpu_input);
-            printf("\r\ncpu's turn:");
+            // printf("cpu's turn:%d", cpu_input);
             // scanf("%d", &x);
             printGrid();
             if(check_for_triplet(cpu_array)){
